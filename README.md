@@ -72,9 +72,9 @@ Through this project, we've gained understanding of:
 
 ## Authors
 
-- Alexandre Mousse
-- Kevin Rouget
-- Antoine Musci
+- [Alexandre Mousse](https://github.com/Alex-git-pro)
+- [Kevin Rouget](https://github.com/koryos77)
+- [Antoine Musci](https://github.com/Entwoane)
 
 ## License
 
