@@ -4,6 +4,11 @@
 
 This project is an implementation of a basic UNIX command interpreter, developed as part of the Holberton School curriculum. Our shell, named `hsh`, can execute commands and manage processes, mimicking core functionalities of the standard shell (sh).
 
+## Flowchart
+
+![Flowchart](image/Shell.jpg)
+
+
 ## Features
 
 - Execution of simple commands
