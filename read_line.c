@@ -4,7 +4,7 @@
  *
  * Return: Pointer that points to a string with the line content
  */
-char **read_line(void)
+char *read_line(void)
 {
 	char *line = NULL;
 	size_t bufsize = 0;
