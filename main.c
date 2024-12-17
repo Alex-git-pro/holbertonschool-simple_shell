@@ -6,7 +6,7 @@
  * Return: 0 on success
  */
 
-int main(int ac, char **argv)
+int main(void)
 {
 	if (isatty(STDIN_FILENO) == 1) /*Check if STDIN is connected to a terminal*/
 	{

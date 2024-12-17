@@ -15,7 +15,7 @@ char *read_stream(void)
 
 	if (line == NULL) /*Check if malloc succeeded*/
 	{
-		frpintf(stderr, "allocation error in read_stream");
+		fprintf(stderr, "allocation error in read_stream");
 		exit(EXIT_FAILURE);
 	}
 	while (1) /*Infinite loop while 1*/
