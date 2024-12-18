@@ -16,4 +16,11 @@ void shell_no_interactive(void);
 char *read_line(void);
 char **split_line(char *line);
 char *read_stream(void);
+int execute_args(char **args);
+int ocd(char **args);
+int oexit(char **args);
+int ohelp(char **args);
+char *_getenv(const char *name);
+
+
 #endif
