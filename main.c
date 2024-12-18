@@ -6,15 +6,18 @@
  * Return: 0 on success
  */
 
-int main(void)
+int main(int ac, char **argv)
 {
+	(void)ac;
+	(void)argv;
+
 	if (isatty(STDIN_FILENO) == 1) /*Check if STDIN is connected to a terminal*/
 	{
-		shell_interactive(); /*Lauch the interactive mode*/
+		shell_interactive(); /*Launch the interactive mode*/
 	}
 	else
 	{
-		shell_no_interactive(); /*Lauch the no-interactive mode*/
+		shell_no_interactive(); /*Launch the no-interactive mode*/
 	}
 	return (0);
 }

@@ -29,7 +29,7 @@ char *read_stream(void)
 		else if (character == '\n') /*If end of line*/
 		{
 			line[i] = '\0'; /*Finish the string*/
-			return (line); /*Return the line readen*/
+			return (line); /*Return the line readden*/
 		}
 		else
 		{
@@ -43,7 +43,7 @@ char *read_stream(void)
 			line = realloc(line, bufsize); /*Realloc the new size*/
 			if (line == NULL) /*If allocation fails print error and exit*/
 			{
-				fprintf(stderr, "reallocation error in read_strem");
+				fprintf(stderr, "reallocation error in read_stream");
 				exit(EXIT_FAILURE);
 			}
 		}
