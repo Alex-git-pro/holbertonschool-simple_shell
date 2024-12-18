@@ -1,15 +1,5 @@
 #include "main.h"
 
-/**
- * num_builtins - returns the number of builtin functions
- * Return: number of builtin functions
- */
-int num_builtins(void)
-{
-	char *builtin_func_list[] = {"cd", "env", "help", "exit"};
-
-	return (sizeof(builtin_func_list) / (sizeof(char *)));
-}
 
 /**
  * execute_args - map if command is a builtin or a process
@@ -44,7 +34,7 @@ int execute_args(char **args)
 		return (-1);
 	}
 
-	for (i = 0; i < num_builtins(); i++)
+	for (i = 0; i < sizeof(builtin_func_list) / sizeof(char *); i++)
 	{
 		if (strcmp(args[0], builtin_func_list[i]) == 0)
 		{
