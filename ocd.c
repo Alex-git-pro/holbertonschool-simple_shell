@@ -20,5 +20,5 @@ int ocd(char **args)
 			perror("cd: unable to switch to specified directory");
 		}
 	}
-	return (-1);
+	return (1);
 }
