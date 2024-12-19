@@ -18,7 +18,7 @@ int ohelp(char **args)
 		"exit"
 	};
 
-	int i = 0;
+	unsigned long int i = 0;
 	(void)(**args);
 
 	printf("\n---help simple_shell---\n");
