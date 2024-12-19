@@ -20,7 +20,8 @@ int execute_args(char **args);
 int ocd(char **args);
 int oexit(char **args);
 int ohelp(char **args);
-char *_getenv(const char *name);
+char *oenv(const char *name);
+void execmd(char **argv);
 
 
 #endif
