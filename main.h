@@ -18,9 +18,9 @@ char **split_line(char *line);
 char *read_stream(void);
 int execute_args(char **args);
 int ocd(char **args);
-int oexit(void);
+int oexit(char **args);
 int ohelp(char **args);
-char *oenv(const char *name);
+char oenv(char **args);
 void execmd(char **argv);
 
 
