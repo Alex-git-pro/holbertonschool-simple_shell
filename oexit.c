@@ -1,10 +1,17 @@
 #include "main.h"
 /**
  * oexit - Function that exit the program
- *
+ * @args: empty args
  * Return: 0
  */
-int oexit(void)
+int oexit(char **args)
 {
-	return (0);
+	if (args[1])
+	{
+		return (atoi(args[1]));
+	}
+	else
+	{
+		return (0);
+	}
 }
