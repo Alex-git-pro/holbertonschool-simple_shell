@@ -11,7 +11,7 @@ char *oenv(const char *name)
 
 	while (*env != NULL)
 	{
-		*token = strtok(*env, "="); /*strtok separate string from 1st '='*/
+		token = strtok(*env, "="); /*strtok separate string from 1st '='*/
 		if (strcmp(token, name) == 0)
 		{
 			return (strtok(NULL, "\0")); /*return value of the var*/
