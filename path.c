@@ -5,19 +5,35 @@
  */
 int path(void)
 {
-	const char *path = oenv("PATH"); /*Retrieve the "PATH" environment variable*/
+	char *args[] = {"PATH", NULL};
+	int result = oenv(args);
+	char *full_path;
 
-	if (path != NULL) /*Check if the environment variable exists*/
+	if (result == 0)
 	{
-		char *full_path = malloc(strlen(path) + strlen("/usr/bin") + 1);
-		/*Construct the desired path*/
+		char *path_value = getenv("PATH");
 
-		strcpy(full_path, path);
-		strcat(full_path, "/usr/bin");
+		if (path_value != NULL)
+		{
+			full_path = malloc(strlen(path_value) + strlen(":/usr/bin") + 1);
 
-		printf("Full path: %s\n", full_path); /*Print the constructed path*/
+			if (full_path == NULL)
+			{
+				perror("malloc failed");
+				return (1);
+			}
 
-		free(full_path);
+			strcpy(full_path, path_value);
+			strcat(full_path, ":/usr/bin");
+
+			printf("Full path: %s\n", full_path);
+
+			free(full_path);
+		}
+		else
+		{
+			printf("Failed to get PATH value.\n");
+		}
 	}
 	else
 	{

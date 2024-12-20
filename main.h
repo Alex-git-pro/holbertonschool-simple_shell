@@ -20,8 +20,9 @@ int execute_args(char **args);
 int ocd(char **args);
 int oexit(char **args);
 int ohelp(char **args);
-char oenv(char **args);
+int oenv(char **args);
 void execmd(char **argv);
+int new_process(void);
 
 
 #endif
