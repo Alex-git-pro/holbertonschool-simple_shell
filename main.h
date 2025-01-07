@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 /*---MACROS---*/
+#define TOK_BUFF_SIZE 64
 #define TOK_DELIM " \t\r\n\a"
 extern char **environ;
 /*---LIBRARIES---*/
@@ -21,8 +22,9 @@ int ocd(char **args);
 int oexit(char **args);
 int ohelp(char **args);
 int oenv(char **args);
-void execmd(char **argv);
-int new_process(void);
+char *get_env(const char *name);
+int try_exec(char **args);
+int new_process(char **args);
 
 
 #endif
