@@ -9,33 +9,21 @@
 
 int ocd(char **args)
 {
-	char *home_dir;
-
-	if (args[1] == NULL)/*Verify if an arg has been added to cd*/
+	/* Check if a directory argument is provided */
+	if (args[1] == NULL)
 	{
-		/*If no args, try to change dir HOME*/
-		home_dir = get_env("HOME");
-		if (home_dir == NULL)
-		{
-			/*If the var HOME isn't define, print error*/
-			fprintf(stderr, "cd: HOME not set\n");
-			return (1);
-		}
-		/*try to change to HOME dir*/
-		if (chdir(home_dir) != 0)
-		{
-			/*If it fails, print error*/
-			perror("cd");
-		}
+		/* Print error message if no directory is specified */
+		fprintf(stderr, "cd: no destination directory specified\n");
 	}
 	else
 	{
-		/*If arg is given, try to change to this dir*/
+		/* Attempt to change directory */
 		if (chdir(args[1]) != 0)
 		{
-			perror("cd");
+			/* Print error message if directory change fails */
+			perror("cd: unable to switch to specified directory");
 		}
 	}
-	/*Return 1 to tell the shell to continue*/
+	/* Return 1 to continue shell execution */
 	return (1);
 }

@@ -42,7 +42,7 @@ int try_exec(char **args)
 		if (path_copy == NULL)
 		{
 		perror("shell");
-			return (-1);
+			exit(EXIT_FAILURE);
 		}
 		/*Tokenize the PATH string into individuals directories*/
 		dir = strtok(path_copy, ":");
@@ -56,8 +56,8 @@ int try_exec(char **args)
 			/*If execve succeeds, doesn't return. If it return if failed*/
 			dir = strtok(NULL, ":");/*Move to the next directory PATH*/
 		}
-		free(path_copy);/*Free the memory allocated for the PATH copy*/
 	}
+		free(path_copy);/*Free the memory allocated for the PATH copy*/
 		return (-1);/*If we reach here, command was not found in any PATH dir*/
 }
 /**

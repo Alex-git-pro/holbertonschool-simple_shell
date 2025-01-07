@@ -6,22 +6,13 @@
  */
 int oexit(char **args)
 {
-	int status = 0;
-	/* Check if an argument was provided to the exit command */
-	if (args[1])
+	if (args[1]) /*Check if there's a second argument*/
 	{
-		char *endptr;
-	/* Convert the argument to an integer */
-		status = strtol(args[1], &endptr, 10);
-	/* Check if the entire string was converted*/
-		if (*endptr != '\0')
-		{
-			/* If not a valid number, print an error message */
-			fprintf(stderr, "exit: Illegal number: %s\n", args[1]);
-			/* Return 1 to continue shell execution */
-			return (1);
-		}
+		return (atoi(args[1]));
+		/*If yes convert it to an int and return it as the exit status*/
 	}
-	/* Exit the shell with the specified status (or 0 if none provided) */
-	exit(status);
+	else
+	{
+		return (0); /*If not, return 0 as the default exit status*/
+	}
 }
