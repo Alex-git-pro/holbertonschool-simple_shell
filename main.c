@@ -1,18 +1,49 @@
 #include "main.h"
-/**
- * main - main function
- * Return: 0 on success
- */
 
-int main(void)
+/**
+ * main - Entry point of the shell program.
+ * @argc: Number of arguments.
+ * @argv: Array of arguments.
+ * Return: 0 on success, 1 on failure.
+ */
+int main(int argc, char **argv)
 {
-	if (isatty(STDIN_FILENO) == 1) /*Check if STDIN is connected to a terminal*/
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t nread = 0;
+	int status = 0;
+
+	/* Check for non-interactive mode */
+	if (argc == 1)
 	{
-		shell_interactive(); /*Launch the interactive mode*/
+		while (1)
+		{
+			/* Prompt user for input */
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "$> ", 2);
+
+			/* Read the input line */
+			nread = getline(&line, &len, stdin);
+			if (nread == -1)
+			{
+				free(line);
+				break;
+			}
+			/* Remove newline character if present */
+			line[nread - 1] = '\0';
+			/* Process the command */
+			status = execute_command(argv[0], line);
+		}
 	}
 	else
 	{
-		shell_no_interactive(); /*Launch the no-interactive mode*/
+		/* Non-interactive mode - process commands from stdin */
+		while (getline(&line, &len, stdin) != -1)
+		{
+			line[nread - 1] = '\0';
+			status = execute_command(argv[0], line);
+		}
 	}
-	return (0);
+	free(line);
+	return (status);
 }
