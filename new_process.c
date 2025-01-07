@@ -88,7 +88,8 @@ int new_process(char **args)
 	else
 	{	/*Parent process*/
 		do {
-			waitpid(pid, &status, WUNTRACED);/*Wait for the child process to change state*/
+			waitpid(pid, &status, WUNTRACED);
+			/*Wait for the child process to change state*/
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 return (1);
