@@ -8,42 +8,37 @@
 
 char *read_stream(void)
 {
-	int bufsize = 1024; /*Size of the buffer*/
-	int i = 0; /*Index to iterate inside the buffer*/
-	char *line = malloc(sizeof(char) * bufsize); /*Allocation of the buffer*/
-	int character; /*Character read*/
-
-	if (line == NULL) /*Check if malloc succeeded*/
+	int bufsize = 1024;
+	int i = 0;
+	char *line = malloc(sizeof(char) * bufsize);
+	int character;
+	/*Check if memory allocation was successful*/
+	if (line == NULL)
 	{
-		fprintf(stderr, "allocation error in read_stream");
+		perror("allocation error in read_stream");
 		exit(EXIT_FAILURE);
 	}
-	while (1) /*Infinite loop while 1*/
+	while (1) /*Infinite loop to read characters*/
 	{
-		character = getchar(); /* read the first char */
-		if (character == EOF) /*If end of file, free and exit*/
+		character = getchar(); /*Read a character*/
+		/*Check for end of input*/
+		if (character == EOF || character == '\n')
 		{
-			free(line);
-			exit(EXIT_SUCCESS);
-		}
-		else if (character == '\n') /*If end of line*/
-		{
-			line[i] = '\0'; /*Finish the string*/
-			return (line); /*Return the line readden*/
+			line[i] = '\0'; /*Null-terminate the string*/
+			return (line); /*Return the completed line*/
 		}
 		else
 		{
-			line[i] = character; /*Add character to the line*/
+			line[i] = character;
 		}
-		i++; /*Iterate through string*/
-
-		if (i >= bufsize) /*If buffer is full, increase his size*/
+		i++;
+		if (i >= bufsize)
 		{
-			bufsize += bufsize; /*Double the size of the buffer*/
-			line = realloc(line, bufsize); /*Realloc the new size*/
-			if (line == NULL) /*If allocation fails print error and exit*/
+			bufsize += 1024;
+			line = realloc(line, bufsize);
+			if (line == NULL)
 			{
-				fprintf(stderr, "reallocation error in read_stream");
+				perror("reallocation error in read_stream");
 				exit(EXIT_FAILURE);
 			}
 		}
