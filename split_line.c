@@ -7,37 +7,34 @@
  */
 char **split_line(char *line)
 {
-	int bufsize = 64; /*Initial size of the buffer to stock tokens*/
-	int i = 0; /*Token position*/
+	int bufsize = TOK_BUFF_SIZE; /*Initial size of the buffer to stock tokens*/
+	int pos = 0; /*Token position counter*/
 	char **tokens = malloc(bufsize * sizeof(char *)); /*Dynamic array*/
 	char *token; /*Pointer to stock each token individually*/
 
-	if (!tokens) /*If malloc fails, print an error & exit*/
+	if (!tokens) /*Check if mem alloc was successful*/
 	{
-		fprintf(stderr, "allocation error in split_line: tokens\n");
+		fprintf(stderr, "shell: allocation error\n");
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, TOK_DELIM);
+	token = strtok(line, TOK_DELIM); /*Get the first token*/
+	while (token != NULL) /*Loop through the string to extract all tokens*/
 	{
-		while (token != NULL) /*Handle comments*/
-		if (token[0] == '#')
+		tokens[pos] = token; /*Store the token in the array*/
+		pos++;
+		if (pos >= bufsize)/*If buffer is full, resize it*/
 		{
-			break;
-		}
-		tokens[i] = token; /*Stock the token*/
-		i++;
-		if (i >= bufsize) /*If the array is full, double its size*/
-		{
-			bufsize += bufsize;
+			bufsize += TOK_BUFF_SIZE;
 			tokens = realloc(tokens, bufsize * sizeof(char *));
-			if (!tokens) /*If realloc fails, print an error & exit*/
+			/*Realloc mem with new size*/
+			if (!tokens) /*Check if realloc was successful*/
 			{
-				fprintf(stderr, "reallocation error on split_line: tokens");
+				fprintf(stderr, "shell: allocation error\n");
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = strtok(NULL, TOK_DELIM); /*Tokenization continue on the same line*/
+		token = strtok(NULL, TOK_DELIM);/*Get the next token*/
 	}
-	tokens[i] = NULL; /*Add NULL at the end of the array*/
-	return (tokens); /*Returns the array with the tokens*/
+	tokens[pos] = NULL;/*NULL terminate the array of tokens*/
+	return (tokens); /*Return the array of tokens*/
 }
