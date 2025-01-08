@@ -14,7 +14,6 @@
 extern char **environ;
 
 /* Function prototypes */
-void display_prompt(void);
 void execute_command(char *input);
 void print_env(void);
 char *get_location(char *command);
