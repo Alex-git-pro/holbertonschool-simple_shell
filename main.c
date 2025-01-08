@@ -13,7 +13,7 @@ int main(void)
 
 	while (1)
 	{
-		display_prompt(); /* Display the shell prompt */
+		printf("$ "); /* Display the shell prompt */
 		chars_read = getline(&input, &input_size, stdin); /* Read user input */
 
 		if (chars_read == -1)
@@ -30,12 +30,4 @@ int main(void)
 
 	free(input); /* Free allocated memory for input */
 	return (0); /* Return success */
-}
-
-/**
- * display_prompt - Displays the shell prompt.
- */
-void display_prompt(void)
-{
-	printf("$ "); /* Simple prompt */
 }
