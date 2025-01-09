@@ -1,0 +1,134 @@
+.TH SIMPLE_SHELL 1 "January 2025" "Version 1.0" "Simple Shell Manual"
+
+.SH NAME
+simple_shell - A lightweight Unix command interpreter.
+
+.SH SYNOPSIS
+.B simple_shell
+[\fIinput_file\fR]
+
+.SH DESCRIPTION
+.B simple_shell
+is a basic command interpreter that executes user commands either interactively or from a specified file. It implements a subset of the functionality of standard Unix shells.
+.PP
+The shell processes commands by checking if they are built-ins. If not, it searches for the executable in directories specified by the PATH environment variable. When located, the command is executed in a new process.
+
+.SS Interactive Mode
+When launched without arguments and connected to a terminal, the shell operates interactively, displaying the prompt:
+.B $
+and waiting for user input.
+
+.SS Non-Interactive Mode
+When provided with an input file or when standard input is redirected, the shell processes commands sequentially without displaying a prompt.
+
+.SH BUILT-IN COMMANDS
+The following commands are natively supported:
+
+.TP
+.B exit [\fIstatus\fR]
+Terminates the shell, returning \fIstatus\fR. Defaults to 0 if no \fIstatus\fR is provided.
+
+.TP
+.B env
+Displays all environment variables.
+
+.TP
+.B Copy the file  to 
+Copies a file from \fI\fR to \fI\fR.
+
+.TP
+.B   ...  times
+Executes a command multiple times as specified by \fInumber\fR.
+
+.SH ENVIRONMENT VARIABLES
+Certain environment variables affect the shell's behavior:
+
+.TP
+.B PATH
+A colon-separated list of directories to search for executable files. If unset or empty, only the current directory is searched.
+
+.TP
+.B HOME
+The default location for user-specific files, typically used by external commands.
+
+.SH RETURN CODES
+The shell exits with one of the following codes:
+.TP
+.B 0
+Command executed successfully.
+.TP
+.B 127
+Command not found in PATH.
+.TP
+.B 1-255
+Error encountered during execution or exit code of the last command.
+
+.SH EXAMPLES
+Interactive usage:
+.PP
+.nf
+.RS
+$ ./simple_shell
+$ echo "Hello, world!"
+Hello, world!
+$ env
+PATH=/usr/bin:/bin
+HOME=/home/user
+$ Copy the file input.txt to output.txt
+$ exit 0
+.RE
+.fi
+
+.PP
+Non-interactive usage:
+.PP
+.nf
+.RS
+$ echo "ls" | ./simple_shell
+file1 file2 file3
+$ ./simple_shell commands.txt
+.RE
+.fi
+
+.SH FEATURES
+.TP
+- Execute external commands with arguments
+.TP
+- Built-in commands for basic operations (e.g., exit, env, Copy)
+.TP
+- Handles PATH for command lookups
+.TP
+- Simple error messages for invalid inputs
+.TP
+- Supports execution of commands multiple times using "times"
+
+.SH LIMITATIONS
+.TP
+- Lacks support for advanced features such as piping, redirections, and background execution.
+.TP
+- No wildcard expansion or pattern matching.
+.TP
+- Command history and editing are not supported.
+.TP
+- Limited error handling for malformed input.
+
+.SH FILES
+.TP
+.I /etc/environment
+System-wide environment variables.
+
+.SH SEE ALSO
+.BR sh (1),
+.BR bash (1),
+.BR environ (7)
+
+.SH REPORTING ISSUES
+To report issues or request features, contact the development team through the project repository or designated communication channels.
+
+.SH AUTHORS
+Developed by Antoine MUSCI, Kevin ROUGET, and Alexandre MOUSSE with a focus on simplicity and functionality.
+
+.SH COPYRIGHT
+Copyright © 2025 Antoine MUSCI, Kevin ROUGET, Alexandre MOUSSE.
+This software is licensed under the MIT License. Permission is granted to use, modify, and distribute freely.
+
