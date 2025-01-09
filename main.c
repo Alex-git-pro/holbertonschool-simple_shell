@@ -23,9 +23,7 @@ int main(void)
 
 		if (chars_read == -1)
 		{
-			perror("getline");
-			free(input);
-			exit(1);
+			break;
 		}
 
 		input[strcspn(input, "\n")] = 0; /* Remove newline character */
