@@ -12,7 +12,7 @@ int main(void)
 	ssize_t chars_read; /* Number of characters read */
 
 	/* Check if the input is from a terminal */
-	if (isatty(fileno(stdin)))
+	if (isatty(STDIN_FILENO))
 	{
 		printf("$ "); /* Display the shell prompt */
 	}
@@ -33,7 +33,7 @@ int main(void)
 			execute_command(input); /* Execute the command entered by the user */
 
 		/* Prompt again only if the input is interactive */
-		if (isatty(fileno(stdin)))
+		if (isatty(STDIN_FILENO))
 		{
 			printf("$ "); /* Display the shell prompt again */
 		}
