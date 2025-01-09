@@ -11,9 +11,14 @@ int main(void)
 	size_t input_size = 0; /* Size of the input buffer */
 	ssize_t chars_read; /* Number of characters read */
 
-	while (1)
+	/* Check if the input is from a terminal */
+	if (isatty(fileno(stdin)))
 	{
 		printf("$ "); /* Display the shell prompt */
+	}
+
+	while (1)
+	{
 		chars_read = getline(&input, &input_size, stdin); /* Read user input */
 
 		if (chars_read == -1)
@@ -26,6 +31,12 @@ int main(void)
 
 		if (strlen(input) > 0)
 			execute_command(input); /* Execute the command entered by the user */
+
+		/* Prompt again only if the input is interactive */
+		if (isatty(fileno(stdin)))
+		{
+			printf("$ "); /* Display the shell prompt again */
+		}
 	}
 
 	free(input); /* Free allocated memory for input */
