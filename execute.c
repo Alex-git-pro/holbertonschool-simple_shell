@@ -27,6 +27,7 @@ void execute_command(char *input)
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: command not found\n", args[0]);
+		free(command_path);
 		return;
 	}
 	if (is_multiple_execution(args, arg_count))
