@@ -192,7 +192,7 @@ void execute_single_command(char *command_path, char **args)
    if (pid == 0) 
    {
        execve(command_path, args, environ); 
-       perror("execve");
+       perror("execve failed");
        exit(EXIT_FAILURE);
    }
    

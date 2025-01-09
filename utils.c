@@ -36,7 +36,8 @@ char *get_location(char *command)
 
 		sprintf(file_path, "%s/%s", path_token, command); /*Construct full path*/
 
-		if (stat(file_path, &buffer) == 0) /*Check if file exists*/
+		if ((stat(file_path, &buffer) == 0) && (buffer.st_mode & S_IXUSR))
+		/*Check if file exists*/
 		{
 			free(path_copy); /*Free duplicated PATH string*/
 			return (strdup(file_path)); /*Command found*/
