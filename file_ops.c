@@ -22,7 +22,6 @@ void copy_file(const char *source, const char *destination)
 		perror("Error opening source file");
 		return;
 	}
-
 	dest_fd = open(destination, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
 	if (dest_fd == -1)
@@ -31,7 +30,6 @@ void copy_file(const char *source, const char *destination)
 		close(source_fd);
 		return;
 	}
-
 	while ((bytes_read = read(source_fd, buffer, sizeof(buffer))) > 0)
 	{
 		bytes_written = write(dest_fd, buffer, bytes_read);
@@ -47,10 +45,11 @@ void copy_file(const char *source, const char *destination)
 	{
 		perror("Error reading source file");
 	}
-	close(source_fd);
-	close(dest_fd);
+	if (close(source_fd) == -1)
+		perror("Error closing source file");
+	if (close(dest_fd) == -1)
+		perror("Error closing destination file");
 }
-
 
 /**
 * execute_copied_file - Executes a copied file with given arguments.
@@ -64,19 +63,26 @@ void execute_copied_file(const char *file, char *args[])
 	pid_t pid;
 	int status;
 
-	 pid = fork();
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("Error during fork");
+		exit(EXIT_FAILURE);
+	}
 
-if (pid == -1)
-{
-	perror("fork");
-	exit(EXIT_FAILURE);
-}
-if (pid == 0)
-{
-	execve(file, args, environ);
-	perror("execve failed");
-	exit(EXIT_FAILURE);
-}
-
-	waitpid(pid, &status, 0);
+	if (pid == 0)
+	{
+		if (execve(file, args, environ) == -1)
+		{
+			perror("Error executing file");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			perror("Error waiting for child process");
+		}
+	}
 }
