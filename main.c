@@ -23,8 +23,9 @@ int main(void)
 
 		if (chars_read == -1)
 		{
-			/* printf("\n");  Handle end of input */
-			break;
+			perror("getline");
+			free(input);
+			exit(1);
 		}
 
 		input[strcspn(input, "\n")] = 0; /* Remove newline character */
