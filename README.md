@@ -8,7 +8,6 @@ This project is an implementation of a basic UNIX command interpreter, developed
 
 ![Flowchart](image/Shell.jpg)
 
-
 ## Features
 
 - Execution of simple commands
@@ -21,30 +20,26 @@ This project is an implementation of a basic UNIX command interpreter, developed
 To compile the shell, use the following command:
 
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
-text
 
 ## Usage
 
 After compilation, run the shell using:
 
 ./hsh
-text
 
 ### Interactive Mode
 
-$ ./hsh
-($) /bin/ls
-hsh main.c shell.c
-($) exit
-$
-text
+$ ./hsh  
+$ /bin/ls  
+hsh main.c shell.c  
+$ exit  
+$  
 
 ### Non-Interactive Mode
 
-$ echo "/bin/ls" | ./hsh
-hsh main.c shell.c test_ls_2
-$
-text
+$ echo "/bin/ls" | ./hsh  
+hsh main.c shell.c test_ls_2  
+$  
 
 ## Command Examples
 
