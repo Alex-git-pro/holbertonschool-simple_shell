@@ -94,5 +94,6 @@ char *get_command_path(char **args)
  */
 int is_multiple_execution(char **args, int arg_count)
 {
+	/* Check if the last argument is "times" and there are enough arguments. */
 	return (arg_count > 2 && strcmp(args[arg_count - 1], "times") == 0);
 }
