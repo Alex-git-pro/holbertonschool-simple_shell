@@ -1,17 +1,15 @@
 #include "shell.h"
-
 /**
- * main - Entry point of the shell program.
- *
- * Return: Always 0 on success.
+ * main - main function
+ * Return: Nothing
  */
 int main(void)
 {
 	char *input = NULL; /* Pointer for user input */
 	size_t input_size = 0; /* Size of the input buffer */
-	ssize_t chars_read; /* Number of characters read */
+	ssize_t chars_read; /* Number of characters read from stdin */
 
-	/* Check if the input is from a terminal */
+	/* Check if input is from a terminal */
 	if (isatty(STDIN_FILENO))
 	{
 		printf("$ "); /* Display the shell prompt */
@@ -23,21 +21,27 @@ int main(void)
 
 		if (chars_read == -1)
 		{
-			break;
+			/* If Ctrl + C is pressed, reset the shell without quitting */
+			if (isatty(STDIN_FILENO))
+			{
+				printf("\n$ "); /* Display the prompt again */
+			}
+			clearerr(stdin); /* Clear the input buffer to avoid infinite loops */
+			continue; /* Restart the loop without exiting */
 		}
 
-		input[strcspn(input, "\n")] = 0; /* Remove newline character */
+		input[strcspn(input, "\n")] = 0; /* Remove newline character from input */
 
 		if (strlen(input) > 0)
 			execute_command(input); /* Execute the command entered by the user */
 
-		/* Prompt again only if the input is interactive */
+		/* Display the prompt again only if the input is interactive */
 		if (isatty(STDIN_FILENO))
 		{
-			printf("$ "); /* Display the shell prompt again */
+			printf("$ "); /* Display the shell prompt */
 		}
 	}
 
-	free(input); /* Free allocated memory for input */
-	return (0); /* Return success */
+	free(input); /* Free the allocated memory for input */
+	return (0); /* Return 0 to indicate success */
 }
